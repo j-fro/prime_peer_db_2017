@@ -8,7 +8,7 @@ myApp.controller('AssignmentController', ['$scope', '$http', function($scope, $h
             assignment_name: $scope.assignmentInput,
             student_name:$scope.studentName,
             score: $scope.score,
-            date_completed: $scope.dateCompleted
+            date_completed: new Date($scope.dateCompleted)
         }; //end assignment obj
         $http.post('/assignments', assignment).then(function(response){
             console.log('response', response);
@@ -18,8 +18,14 @@ myApp.controller('AssignmentController', ['$scope', '$http', function($scope, $h
 
     $scope.getAssignments = function() {
         $http.get('/assignments').then(function(response) {
-            $scope.assignments = response.data;
-            $scope.allAssignments = response.data;
+            $scope.assignments = response.data.map(function(assignment) {
+                assignment.date_completed = new Date(assignment.date_completed);
+                return assignment;
+            });
+            $scope.allAssignments = response.data.map(function(assignment) {
+                assignment.date_completed = new Date(assignment.date_completed);
+                return assignment;
+            });
             console.log('Assignments', $scope.assignments);
         });
     };
@@ -29,7 +35,10 @@ myApp.controller('AssignmentController', ['$scope', '$http', function($scope, $h
     $scope.showOneAssignment = function() {
         console.log('showing one assignment', $scope.selectedAssignment);
         $http.get('/assignments/' + $scope.selectedAssignment).then(function(response) {
-            $scope.assignments = response.data;
+            $scope.assignments = response.data.map(function(assignment) {
+                assignment.date_completed = new Date(assignment.date_completed);
+                return assignment;
+            });
         });
     };
 
@@ -42,7 +51,7 @@ myApp.controller('AssignmentController', ['$scope', '$http', function($scope, $h
 
     $scope.updateAssignment= function(assignment) {
         console.log('in update Assignment', assignment);
-        $http.put('/assignments/' + assignment._id).then(function(response){
+        $http.put('/assignments', assignment).then(function(response){
             $scope.getAssignments();
         });//end update
     };// end updateAssignment

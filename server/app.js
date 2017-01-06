@@ -79,9 +79,9 @@ app.delete('/assignments/:id', function (req, res){
     });
 });
 
-app.put('/assignments/:id', function (req, res){
-    console.log('updating an assignment:', req.params);
-    Assignment.findByIdAndUpdate (req.params.id, function(err) {
+app.put('/assignments', function (req, res){
+    console.log('updating an assignment:', req.body);
+    Assignment.findByIdAndUpdate (req.body._id, req.body, function(err) {
         if (err) {
             console.log(err);
             res.sendStatus(500);

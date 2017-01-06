@@ -20,9 +20,16 @@
                 {{ assignment.assignment_name }}
                 {{ assignment.student_name }}
                 {{ assignment.score }}
-                {{ assignment.date_completed }}
-                <button ng-click="updateAssignment(assignment)">Update Assignment</button>
+                {{ assignment.date_completed | date: 'MM/dd/yy' }}
+                <button ng-click="updateAssignment(assignment)" ng-show="assignment.updating">Update Assignment</button>
+                <button ng-click="assignment.updating = true" ng-show="!assignment.updating">Update Assignment</button>
                 <button ng-click="deleteAssignment(assignment)">Delete Assignment</button>
+                <div ng-show="assignment.updating">
+                    Assignment Name:<input type="text" ng-model="assignment.assignment_name">
+                    Student Name:<input type="text" ng-model="assignment.student_name">
+                    Score:<input type="number" ng-model="assignment.score">
+                    Date Completed:<input type="date" ng-model="assignment.date_completed">
+                </div>
             </li>
         </ul>
         <select ng-model="selectedAssignment">

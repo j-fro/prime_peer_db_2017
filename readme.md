@@ -102,5 +102,5 @@ Hard mode
 
 Pro Mode
 ========
-[]Add another button to each record on the index that allows the user to update the database entry.
-[]Updating should either be done in a modal window, or a series of inputs that shows/hides when the edit button is clicked.
+[x]Add another button to each record on the index that allows the user to update the database entry.
+[x]Updating should either be done in a modal window, or a series of inputs that shows/hides when the edit button is clicked.
