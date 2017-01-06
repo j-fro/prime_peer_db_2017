@@ -1,0 +1,12 @@
+.assignment-value {
+    text-align: center;
+}
+
+.assignment-list {
+    list-style: none;
+}
+
+.row {
+    margin: 10px;
+    vertical-align: middle;
+}

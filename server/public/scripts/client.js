@@ -1,7 +1,7 @@
 var myApp = angular.module('myApp',[]);
 myApp.controller('AssignmentController', ['$scope', '$http', function($scope, $http){
     console.log('NG');
-    $scope.assigments=[];
+    // $scope.assigments=[];
     $scope.submitAssignment= function() {
         console.log('in submitAssignment()');
         var assignment = {

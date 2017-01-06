@@ -5,37 +5,45 @@
     <title>Assignments Tracker</title>
     <script src="/vendors/angular.min.js" charset="utf-8"></script>
     <script src="/scripts/client.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/master.css">
 </head>
 <body ng-app="myApp">
-    <div ng-controller="AssignmentController">
+    <div ng-controller="AssignmentController" class="container">
         <h1>Assignments Tracker</h1>
         <h2>Enter Assignment</h2>
         Assignment Name:<input type="text" ng-model="assignmentInput">
         Student Name:<input type="text" ng-model="studentName">
         Score:<input type="number" ng-model="score">
         Date Completed:<input type="date" ng-model="dateCompleted">
-        <button ng-click="submitAssignment()">Submit Assignment</button>
-        <ul>
-            <li ng-repeat="assignment in assignments">
-                {{ assignment.assignment_name }}
-                {{ assignment.student_name }}
-                {{ assignment.score }}
-                {{ assignment.date_completed | date: 'MM/dd/yy' }}
-                <button ng-click="updateAssignment(assignment)" ng-show="assignment.updating">Update Assignment</button>
-                <button ng-click="assignment.updating = true" ng-show="!assignment.updating">Update Assignment</button>
-                <button ng-click="deleteAssignment(assignment)">Delete Assignment</button>
+        <button ng-click="submitAssignment()" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></button>
+        <ul class="assignment-list">
+            <li ng-show="assignments" class="row">
+                <div class="assignment-value col-xs-2 col-xs-offset-1"><strong>Assignment Name</strong></div>
+                <div class="assignment-value col-xs-2"><strong>Student Name</strong></div>
+                <div class="assignment-value col-xs-2"><strong>Student's Score</strong></div>
+                <div class="assignment-value col-xs-2"><strong>Date Completed</strong></div>
+            </li>
+            <li ng-repeat="assignment in assignments" class="row">
+                <div class="assignment-value col-xs-2 col-xs-offset-1">{{ assignment.assignment_name }}</div>
+                <div class="assignment-value col-xs-2">{{ assignment.student_name }}</div>
+                <div class="assignment-value col-xs-2">{{ assignment.score }}</div>
+                <div class="assignment-value col-xs-2">{{ assignment.date_completed | date: 'MM/dd/yy' }}</div>
+                <button ng-click="updateAssignment(assignment)" ng-show="assignment.updating" class="btn btn-warning col-xs-1"><span class="glyphicon glyphicon-ok"></span></button>
+                <button ng-click="assignment.updating = true" ng-show="!assignment.updating" class="btn btn-warning col-xs-1"><span class="glyphicon glyphicon-pencil"></span></button>
+                <button ng-click="deleteAssignment(assignment)" class="btn btn-danger col-xs-1"><span class="glyphicon glyphicon-remove"></span></button>
                 <div ng-show="assignment.updating">
-                    Assignment Name:<input type="text" ng-model="assignment.assignment_name">
-                    Student Name:<input type="text" ng-model="assignment.student_name">
-                    Score:<input type="number" ng-model="assignment.score">
-                    Date Completed:<input type="date" ng-model="assignment.date_completed">
+                    <div class="assignment-value col-xs-2 col-xs-offset-1">Assignment Name:<input type="text" ng-model="assignment.assignment_name"></div>
+                    <div class="assignment-value col-xs-2">Student Name:<input type="text" ng-model="assignment.student_name"></div>
+                    <div class="assignment-value col-xs-2">Score:<input type="number" ng-model="assignment.score"></div>
+                    <div class="assignment-value col-xs-2">Date Completed:<input type="date" ng-model="assignment.date_completed"></div>
                 </div>
             </li>
         </ul>
         <select ng-model="selectedAssignment">
             <option ng-repeat="assignment in allAssignments" value="{{ assignment._id }}">{{ assignment.assignment_name }}</option>
         </select>
-        <button type="button" ng-click="showOneAssignment()">Show This Assignment</button>
+        <button type="button" ng-click="showOneAssignment()" class="btn btn-primary">Show This Assignment</button>
     </div>
 </body>
 </html>
